@@ -1,15 +1,18 @@
 import style from '@/components/styles/InputTodo.module.css'
 import { useState } from 'react';
-const InputTodo = ({ addToDo }) => {
+import { useDispatch } from 'react-redux';
+import { addToDo } from './redux/todosSlice';
+const InputTodo = () => {
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     setTitle(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title.trim()) {
-        addToDo(title);
+        dispatch(addToDo(title));
         setTitle('');
         setMessage('');
       } else {
